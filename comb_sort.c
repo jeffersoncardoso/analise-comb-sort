@@ -15,7 +15,8 @@ void mostrar(int * vetor){
 }
 
 int calcularGap(int gap){
-	gap = gap / 1.3; //Fator de encolhimento
+	
+	gap = gap / 1.3; //1.3 é o Fator de encolhimento. Se a divisão o resultado for float, através do casting será convertido para inteiro
 	if(gap < 1) return 1; //Caso a divisão do gap pelo fator de encolhimento seja menor que um, então o gap será 1(distancia de um elemento)
 	
 	return gap;
