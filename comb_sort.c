@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define TAM 1000
+#define TAM 10
 #define true 1
 #define false 0
 
@@ -14,22 +14,6 @@ void mostrar(int * vetor){
 	printf("%\n");
 }
 
-int * gerarVetor(int vetor[]){
-	int i;
-
-	srand((unsigned)time(0));
-	int maior = 10000;
-	int menor = 1;
-	int aleatorio = 0;
-
-	for(i = 0; i < TAM; i++){
-		vetor[i] = rand()%(maior-menor+1) + menor;
-	}
-
-	return vetor;
-}
-
-
 int calcularGap(int gap){
 	gap = gap / 1.3; //Fator de encolhimento
 	if(gap < 1) return 1; //Caso a divisão do gap pelo fator de encolhimento seja menor que um, então o gap será 1(distancia de um elemento)
@@ -38,16 +22,22 @@ int calcularGap(int gap){
 }
 
 void trocarLugares(int * primeiro, int * segundo){ //Utilizo o conceito de ponteiro para realizar a troca dos valores
-	int auxiliar = 0;
-	auxiliar = *primeiro; //Coloco o valor do primeiro na variável auxiliar
+	int auxiliar = *primeiro; //Coloco o valor do primeiro na variável auxiliar
 	*primeiro = *segundo; //atribuio o valor do segundo no primeiro
 	*segundo = auxiliar; //atribuio o valor do auxiliar ao segundo
 }
 
+
+/*
+	O algoritmo comb sort é um algoritmo de ordenação baseado no bubbleSort;
+	Enquanto que no bubble sort cada elemento é comparado com seu vizinho a direita(gap é igual a 1),
+	no comb sort cada elemento é comparado com o elemento cujo indice é dado por um fator(o gap), sendo o gap calculado a cada iteração
+	Apesar de pequena essa mudança ajuda a eliminar as chamadas Tartarugas(valores menores que ficam no final da lista e tornam o bubble sort mais lento).
+*/
 void combSort(int * vetor, int tamanho){
 	int i = 0;
 	int gap = tamanho; //Inicializo o gap com o tamanho do vetor;
-	//O gap é o espaço entre o elemento de referencia e o elemento que irei compara-lo
+	//O gap é o espaço entre o elemento de referência e o elemento que irei compara-lo
 	//em algoritmos como o bubble sort esse gap é igual a 1(vizinho com vizinho).
 	//No comb sort esse espaço é calculado baseado em um fator de encolhimento que por convenção e simulações é igual a 1,3
 	
@@ -61,7 +51,7 @@ void combSort(int * vetor, int tamanho){
 			
 			if ( vetor[i] > vetor[i + gap] ){ //Comparo cada elemento com o elemento com 'gap' posições ao lado
 				trocarLugares(&vetor[i], &vetor[i + gap]); //Caso seja maior, faço a troca dos elementos
-				houveTrocaDeLugares = true; //e a flag virá true
+				houveTrocaDeLugares = true; //e a flag vira true
 			}
             
 		}
@@ -76,9 +66,9 @@ void combSort(int * vetor, int tamanho){
 
 
 void main(){
-	//int vetor[TAM] = {3,2,1,5,4,9,7,8,6,0};
-	int vetor[TAM];
-	combSort(gerarVetor(vetor), TAM);
+	int vetor[TAM] = {3,2,1,5,4,9,7,8,6,0};
 	
+	mostrar(vetor);
+	combSort(vetor, TAM);
 	mostrar(vetor);
 }
