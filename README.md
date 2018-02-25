@@ -5,3 +5,6 @@
 
 - Escolher um algoritmo de ordenação e implementar em linguagem C
 - Dado uma lista de números, simular cada uma das iterações do algoritmo, demonstrando cada alteração na lista até que esteja totalmente ordenada
+
+# Implementação
+- O algoritmo escolhido foi o Comb Sort. É um algoritmo de complexidade O(n²).
